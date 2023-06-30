@@ -2,10 +2,15 @@ import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { GrFormAdd } from "react-icons/gr";
 import { FaUserEdit } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
+import TodoListItem from "../components/TodoListItem";
 
-export default function Main(props) {
+export default function Main({ props }) {
   const [isHovered, setIsHovered] = useState(false);
   const [showText, setShowText] = useState(false);
+
+  const location = useLocation();
+  const { name } = location.state.key;
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -18,6 +23,11 @@ export default function Main(props) {
     setIsHovered(false);
     setShowText(false);
   };
+
+  const handleChange = (event) => {
+    setTodo(event.target.value);
+  };
+
   return (
     <section>
       <section className="w-screen h-screen flex justify-center items-center bg-Beige">
@@ -51,33 +61,33 @@ export default function Main(props) {
             )}
           </div>
         </div>
+
         <div
           className={twMerge(
             `w-[500px] h-[700px] flex justify-center items-end bg-DarkBeige mr-4 rounded-[40px]`
           )}
         >
-          <input
-            className={twMerge(
-              `w-[440px] h-[70px] bg-Beige rounded-[20px] mb-8 pl-6 outline-none`
-            )}
-          ></input>
-          <button className="absolute w-[44px] h-[44px] ml-[340px] mb-11 bg-Blue rounded-full">
-            <GrFormAdd className="w-[30px] h-[30px] ml-2" />
-          </button>
+          <TodoListItem />
         </div>
         <div className="h-[700px]">
           <div
             className={twMerge(
-              `w-[460px] h-[220px] ml-4 flex items-center bg-Navy rounded-[40px]`
+              `relative w-[460px] h-[220px] ml-4 flex justify-items-center items-center bg-Navy rounded-[40px]`
             )}
           >
             <div
-              className={twMerge(
-                `w-[100px] h-[100px] ml-14 bg-Beige rounded-full`
-              )}
-            ></div>
-            <div>{props.setName}</div>
-            <FaUserEdit className="w-[30px] h-[30px] ml-[250px] mt-[140px] text-Beige" />
+              className={`flex w-[400px] justify-center items-center gap-[10px] absolute ml-6`}
+            >
+              <div
+                className={twMerge(
+                  `flex w-[100px] h-[100px] bg-Beige rounded-full mr-6`
+                )}
+              ></div>
+              <div className={`w-[160px] font-bold text-lg text-Beige`}>
+                Welcome, {name} 님!
+              </div>
+              <FaUserEdit className="w-[30px] h-[30px] text-Beige" />
+            </div>
           </div>
           <div className="flex h-[700px] mt-4 ml-4 justify-start items-start">
             <div

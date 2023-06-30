@@ -18,10 +18,6 @@ export default function StartPage() {
     setShowNameQuestion(true);
   }, 1600);
 
-  const handleButtonClick = () => {
-    goToMainPage();
-  };
-
   const handleName = (event) => {
     setName(event.target.value);
     console.log(event.target.value);
@@ -29,12 +25,12 @@ export default function StartPage() {
 
   const handleEnterPress = (event) => {
     if (event.key === "Enter") {
-      goToMainPage();
+      navigate("/main", { state: { key: { name } } });
     }
   };
 
-  const goToMainPage = () => {
-    navigate("/main");
+  const handleButtonClick = () => {
+    navigate("/main", { state: { key: { name } } });
   };
 
   return (
@@ -73,25 +69,23 @@ export default function StartPage() {
             `w-[400px] h-[120px] absolute right-[80px] bottom-[100px]`
           )}
         >
-          <form>
-            <input
-              className={twMerge(
-                `w-[400px] h-[120px] bg-DarkBeige rounded-[40px] text-2xl pl-6 outline-none`
-              )}
-              value={name}
-              onChange={handleName}
-              onKeyPress={handleEnterPress}
-            ></input>
-            <button
-              type="submit"
-              className={twMerge(
-                `w-[60px] h-[60px] absolute right-[40px] top-[30px] bg-Navy rounded-full`
-              )}
-              onClick={handleButtonClick}
-            >
-              <FaRegPaperPlane className={twMerge(`w-7 h-7 text-Beige ml-3`)} />
-            </button>
-          </form>
+          <input
+            className={twMerge(
+              `w-[400px] h-[120px] bg-DarkBeige rounded-[40px] text-2xl pl-6 outline-none`
+            )}
+            value={name}
+            onChange={handleName}
+            onKeyPress={handleEnterPress}
+          ></input>
+          <button
+            type="submit"
+            className={twMerge(
+              `w-[60px] h-[60px] absolute right-[40px] top-[30px] bg-Navy rounded-full`
+            )}
+            onClick={handleButtonClick}
+          >
+            <FaRegPaperPlane className={twMerge(`w-7 h-7 text-Beige ml-3`)} />
+          </button>
         </div>
       </div>
     </section>
