@@ -1,0 +1,27 @@
+/* Tailwind 기본 스타일과 플러그인에 의해 등록된 모든 기본 스타일을 주입합니다. */
+@tailwind base;
+
+/* Tailwind 컴포넌트 클래스와 플러그인에 의해 등록된 컴포넌트 클래스를 주입합니다. */
+@tailwind components;
+
+/* Tailwind 유틸리티 클래스와 플러그인에 의해 등록된 모든 유틸리티 클래스를 주입합니다. */
+@tailwind utilities;
+ㄴ
+/* 사용자 정의 스타일 */
+[hidden] {
+  @apply hidden;
+}
+
+:root {
+  font-family: "Noto Sans Kr", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
