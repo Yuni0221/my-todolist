@@ -41,7 +41,7 @@ export default function StartPage() {
             className={twMerge(`w-[46px] h-[46px] mt-[50px] mr-[10px]`)}
           />
           <span className={twMerge(`text-5xl font-bold mt-[50px]`)}>
-            To-do List!!
+            To-do List
           </span>
         </div>
         <div
