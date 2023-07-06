@@ -64,7 +64,7 @@ export default function Main({ props }) {
 
         <div
           className={twMerge(
-            `w-[500px] h-[700px] flex justify-center items-end bg-DarkBeige mr-4 rounded-[40px]`
+            `w-[500px] h-[700px] flex justify-center bg-DarkBeige mr-4 rounded-[40px]`
           )}
         >
           <TodoListItem />
