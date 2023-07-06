@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { GrFormAdd } from "react-icons/gr";
 import { FaUserEdit } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import TodoListItem from "../components/TodoListItem";
+import Weather from "../components/Weather";
 
 export default function Main({ props }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -22,10 +22,6 @@ export default function Main({ props }) {
   const handleMouseLeave = () => {
     setIsHovered(false);
     setShowText(false);
-  };
-
-  const handleChange = (event) => {
-    setTodo(event.target.value);
   };
 
   return (
@@ -94,7 +90,9 @@ export default function Main({ props }) {
               className={twMerge(
                 `w-[220px] h-[220px] mr-5 bg-Blue rounded-[40px]`
               )}
-            ></div>
+            >
+              <Weather />
+            </div>
             <div
               className={twMerge(`w-[220px] h-[220px] bg-Blue rounded-[40px]`)}
             ></div>
