@@ -6,65 +6,13 @@ import TodoListItem from "../components/TodoListItem";
 import Weather from "../components/Weather";
 
 export default function Main({ props }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [showText, setShowText] = useState(false);
-
   const location = useLocation();
   const { name } = location.state.key;
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    setTimeout(() => {
-      setShowText(true);
-    }, 300);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setShowText(false);
-  };
 
   return (
     <section>
       <section className="w-screen h-screen flex justify-center items-center bg-Beige">
-        <div className={twMerge("mb-[480px]")}>
-          <div
-            className={twMerge(
-              "relative w-[30px] h-[50px] rounded-tl-2xl bg-Navy mb-1",
-              isHovered
-                ? "transition-width duration-300 delay-100 -ml-[130px] w-[160px]"
-                : "transition-width duration-300"
-            )}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            {showText && (
-              <p className="text-sm text-Beige pt-3 pl-6">Ongoing task🧘🏻‍♀️</p>
-            )}
-          </div>
-          <div
-            className={twMerge(
-              "relative w-[30px] h-[50px] rounded-bl-2xl bg-Navy",
-              isHovered
-                ? "transition-width duration-300 delay-100 -ml-[130px] w-[160px]"
-                : "transition-width duration-300"
-            )}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {showText && (
-              <p className="text-sm text-Beige pt-3 pl-6">Completed task🐰</p>
-            )}
-          </div>
-        </div>
-
-        <div
-          className={twMerge(
-            `w-[500px] h-[700px] flex justify-center bg-DarkBeige mr-4 rounded-[40px]`
-          )}
-        >
-          <TodoListItem />
-        </div>
+        <TodoListItem />
         <div className="h-[700px]">
           <div
             className={twMerge(

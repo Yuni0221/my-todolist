@@ -4,10 +4,21 @@ import { GrFormAdd } from "react-icons/gr";
 import { AiOutlineCheck } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 
-export default function TodoListItem() {
+export default function TodoListItem(content) {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState([]);
   const [completedItems, setCompletedItems] = useState([]);
+  const [currentTab, setCurrentTab] = useState(0);
+
+  const tabArr = [
+    { name: "All tasks 🌷" },
+    { name: "Ongoing task 🐰" },
+    { name: "Completed task 🍋" },
+  ];
+
+  const clickTabHandler = (index) => {
+    setCurrentTab(index);
+  };
 
   const handleChangeTodo = (event) => {
     setTodo(event.target.value);
@@ -37,14 +48,49 @@ export default function TodoListItem() {
       setTodo("");
     }
   };
+
+  const completedTodos = todos.filter((item) => completedItems.includes(item));
+  const ongoingTodos = todos.filter((item) => !completedItems.includes(item));
+
+  let displayedTodos = todos;
+  if (currentTab === 1) {
+    displayedTodos = ongoingTodos;
+  } else if (currentTab === 2) {
+    displayedTodos = completedTodos;
+  }
+
   return (
     <>
-      <div className={`relative`}>
+      <div className={"w-[150px] h-[700px] mt-20"}>
+        {tabArr.map((el, index) => (
+          <li
+            className={`flex h-[32px] justify-center align-center list-none items-center bg-Navy mt-1 text-Beige ${
+              index === 0
+                ? "rounded-tl-[18px]"
+                : index === tabArr.length - 1
+                ? "rounded-bl-[18px]"
+                : ""
+            }`}
+            onClick={() => clickTabHandler(index)}
+          >
+            {el.name}
+          </li>
+        ))}
+        <div className={twMerge("ml-[200px]")}>
+          {currentTab !== 0 && tabArr[currentTab].content}
+        </div>
+      </div>
+
+      <div
+        className={twMerge(
+          `w-[500px] h-[700px] flex justify-center bg-DarkBeige rounded-[40px]`
+        )}
+      >
         <ul className={"w-[400px] [500px] pt-10"}>
-          {todos.map((item) => (
+          {displayedTodos.map((item) => (
             <li className={"flex items-center p-1"}>
               <input
-                className={"mr-2 w-4 h-4  accent-pink-500 rounded-lg"}
+                className={"mr-2 w-4 h-4 accent-pink-500"}
                 type="checkbox"
                 onChange={() => handleCheckboxChange(item)}
                 checked={completedItems.includes(item)}
@@ -63,9 +109,10 @@ export default function TodoListItem() {
             </li>
           ))}
         </ul>
+
         <form
           onSubmit={handleSubmit}
-          className="flex justify-center items-center absolute w-[100%] top-auto left-0 bottom-6"
+          className="flex items-center absolute bottom-12"
         >
           <input
             placeholder="what is your plan?"
@@ -73,10 +120,10 @@ export default function TodoListItem() {
             value={todo}
             onChange={handleChangeTodo}
             className={twMerge(
-              `w-[400px] h-[70px] bg-Beige rounded-[28px] mr-4 p-4 outline-none`
+              `w-[380px] h-[70px] bg-Beige rounded-[28px] mr-4 p-4 outline-none`
             )}
           ></input>
-          <button className="flex justify-center w-[50px] h-[44px] bg-Blue rounded-full items-center">
+          <button className="flex justify-center w-[50px] h-[50px] bg-Blue rounded-full items-center">
             <GrFormAdd className="w-[30px] h-[30px]" />
           </button>
         </form>
