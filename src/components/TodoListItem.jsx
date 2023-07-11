@@ -61,10 +61,10 @@ export default function TodoListItem(content) {
 
   return (
     <>
-      <div className={"w-[150px] h-[700px] mt-20"}>
+      <div className={"w-[146px] h-[700px] mt-20 text-[14px]"}>
         {tabArr.map((el, index) => (
           <li
-            className={`flex h-[32px] justify-center align-center list-none items-center bg-Navy mt-1 text-Beige ${
+            className={`flex h-[32px] justify-center align-center list-none items-center bg-Navy mt-1 text-Beige cursor-pointer ${
               index === 0
                 ? "rounded-tl-[18px]"
                 : index === tabArr.length - 1
