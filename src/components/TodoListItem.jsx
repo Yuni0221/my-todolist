@@ -64,13 +64,14 @@ export default function TodoListItem(content) {
       <div className={"w-[146px] h-[700px] mt-20 text-[14px]"}>
         {tabArr.map((el, index) => (
           <li
+            key={index}
             className={`flex h-[32px] justify-center align-center list-none items-center bg-Navy mt-1 text-Beige cursor-pointer ${
               index === 0
                 ? "rounded-tl-[18px]"
                 : index === tabArr.length - 1
                 ? "rounded-bl-[18px]"
                 : ""
-            }`}
+            } ${currentTab === index ? "font-bold" : ""}`}
             onClick={() => clickTabHandler(index)}
           >
             {el.name}
@@ -88,7 +89,7 @@ export default function TodoListItem(content) {
       >
         <ul className={"w-[400px] [500px] pt-10"}>
           {displayedTodos.map((item) => (
-            <li className={"flex items-center p-1"}>
+            <li key={item} className={"flex items-center p-1"}>
               <input
                 className={"mr-2 w-4 h-4 accent-pink-500"}
                 type="checkbox"

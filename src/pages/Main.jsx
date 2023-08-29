@@ -8,13 +8,13 @@ import Weather from "../components/Weather";
 export default function Main({ props }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+
   const location = useLocation();
   const { name } = location.state.key;
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-
     reader.onload = (e) => {
       const imageUrl = e.target.result;
       setImageUrl(imageUrl);
@@ -22,6 +22,7 @@ export default function Main({ props }) {
     };
     reader.readAsDataURL(file);
   };
+
   return (
     <section>
       <section className="w-screen h-screen flex justify-center items-center bg-Beige">
@@ -37,33 +38,46 @@ export default function Main({ props }) {
             >
               <div
                 className={twMerge(
-                  `flex justify-center items-center w-[100px] h-[100px] bg-Beige rounded-full mr-6`
+                  `flex justify-center items-center w-[100px] h-[100px] bg-Beige rounded-full mr-6 overflow-auto`
                 )}
               >
                 {imageUrl ? (
                   <img
                     src={imageUrl}
                     alt="Uploaded Image"
-                    className="w-[100px] h-[100px] rounded-full"
+                    className="w-[100px] h-[100px] rounded-full shrink-0"
                   />
                 ) : (
                   <div className="relative">
-                    <FaUserPlus
-                      className="w-[30px] h-[30px] text-Gray cursor-pointer"
-                      onChange={handleImageUpload}
-                    />
                     <input
+                      id="userImage"
                       type="file"
                       onChange={handleImageUpload}
-                      className="flex absolute items-center w-[30px] h-[30px] inset-0 opacity-0 cursor-pointer"
+                      className="hidden"
                     />
+                    <label htmlFor="userImage" className="cursor-pointer">
+                      <FaUserPlus
+                        className="w-[30px] h-[30px] text-Gray"
+                        onChange={handleImageUpload}
+                      />
+                    </label>
                   </div>
                 )}
               </div>
               <div className={`w-[160px] font-bold text-lg text-Beige`}>
                 Welcome, {name} 님!
               </div>
-              <FaUserEdit className="w-[30px] h-[30px] text-Beige" />
+              <div className="relative">
+                <input
+                  id="editImage"
+                  type="file"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+                <label htmlFor="editImage" className="cursor-pointer">
+                  <FaUserEdit className="w-[30px] h-[30px] text-Beige" />
+                </label>
+              </div>
             </div>
           </div>
           <div className="flex h-[700px] mt-4 ml-4 justify-start items-start">
