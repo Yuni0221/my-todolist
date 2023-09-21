@@ -50,15 +50,11 @@ export default function Weather() {
 
   return (
     <>
-      <div
-        className={
-          "flex flex-col justify-center items-center h-[220px] text-Beige font-bold"
-        }
-      >
-        <div>
+      <div>
+        <div className="ml-4 text-sm">@ {name}</div>
+        <div className="ml-4 text-sm">
           {temp}° {weather}
         </div>
-        <div>@{name}</div>
       </div>
     </>
   );

@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { FaUserEdit, FaUserPlus } from "react-icons/fa";
+import { FaUserEdit, FaUserPlus, FaCircle } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import TodoListItem from "../components/TodoListItem";
 import Weather from "../components/Weather";
+import Date from "../components/Date";
+import Chart from "../components/Chart";
 
 export default function Main({ props }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+
+  const [todo, setTodo] = useState("");
+  const [todos, setTodos] = useState([]);
+  const [completedItems, setCompletedItems] = useState([]);
+  const [currentTab, setCurrentTab] = useState(0);
+
+  const [taskValue, setTaskValue] = useState({
+    totalCompleted: 0,
+    totalOngoing: 0,
+  });
 
   const location = useLocation();
   const { name } = location.state.key;
@@ -25,8 +37,19 @@ export default function Main({ props }) {
 
   return (
     <section>
-      <section className="w-screen h-screen flex justify-center items-center bg-Beige">
-        <TodoListItem />
+      <section className="flex justify-center items-center bg-Beige">
+        <TodoListItem
+          todo={todo}
+          todos={todos}
+          completedItems={completedItems}
+          currentTab={currentTab}
+          setTodo={setTodo}
+          setTodos={setTodos}
+          setCompletedItems={setCompletedItems}
+          setCurrentTab={setCurrentTab}
+          taskValue={taskValue}
+          setTaskValue={setTaskValue}
+        />
         <div className="h-[700px]">
           <div
             className={twMerge(
@@ -86,11 +109,32 @@ export default function Main({ props }) {
                 `w-[220px] h-[220px] mr-5 bg-Blue rounded-[40px]`
               )}
             >
-              <Weather />
+              <div className="flex flex-col mt-4 h-[220px] text-Beige font-bold">
+                <Weather />
+                <Date />
+              </div>
             </div>
             <div
               className={twMerge(`w-[220px] h-[220px] bg-Blue rounded-[40px]`)}
-            ></div>
+            >
+              <div className="flex items-center mt-4">
+                <span className="ml-4 mr-2 text-Beige font-bold text-sm">
+                  Ongoing
+                </span>
+                <FaCircle className="text-[#00bfff]" />
+              </div>
+              <div className="flex items-center">
+                <span className="ml-4 mr-2 text-Beige font-bold text-sm">
+                  Completed
+                </span>
+                <FaCircle className="text-[#f472b6]" />
+              </div>
+
+              <Chart
+                totalCompleted={taskValue.totalCompleted}
+                totalOngoing={taskValue.totalOngoing}
+              />
+            </div>
           </div>
         </div>
       </section>

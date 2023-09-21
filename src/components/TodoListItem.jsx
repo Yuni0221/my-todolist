@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 import { GrFormAdd } from "react-icons/gr";
 import { AiOutlineCheck } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 
-export default function TodoListItem(content) {
-  const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
-  const [completedItems, setCompletedItems] = useState([]);
-  const [currentTab, setCurrentTab] = useState(0);
-
+export default function TodoListItem({
+  todo,
+  setTodo,
+  todos,
+  setTodos,
+  completedItems,
+  setCompletedItems,
+  currentTab,
+  setCurrentTab,
+  taskValue,
+  setTaskValue,
+}) {
   const tabArr = [
     { name: "All tasks 🌷" },
     { name: "Ongoing task 🐰" },
@@ -22,7 +28,6 @@ export default function TodoListItem(content) {
 
   const handleChangeTodo = (event) => {
     setTodo(event.target.value);
-    console.log(event.target.value);
   };
 
   const handleCheckboxChange = (item) => {
@@ -58,6 +63,19 @@ export default function TodoListItem(content) {
   } else if (currentTab === 2) {
     displayedTodos = completedTodos;
   }
+
+  useEffect(() => {
+    const totalCompleted = completedTodos.length;
+    const totalOngoing = ongoingTodos.length;
+
+    setTaskValue((prev) => {
+      return {
+        ...prev,
+        totalCompleted: totalCompleted,
+        totalOngoing: totalOngoing,
+      };
+    });
+  }, [todos, completedItems]);
 
   return (
     <>

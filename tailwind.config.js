@@ -11,9 +11,15 @@ export default {
         Navy: "#00327D",
         Black: "#000000",
       },
-
       fontFamily: {
         "line-seed-sans-kr": "LINE Seed Sans KR",
+      },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
       },
       borderRadius: {},
     },
