@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import API_KEY from "../../apikey.js";
 
 export default function Weather() {
   const [coords, saveCoords] = useState();
@@ -7,10 +6,12 @@ export default function Weather() {
   const [temp, setTemp] = useState();
   const [weather, setWeather] = useState();
 
+  const apiKey = import.meta.env.VITE_API_KEY;
+
   const getWeather = (lat, lon) => {
     console.log(lat, lon);
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
     )
       .then((res) => res.json())
       .then((data) => {
