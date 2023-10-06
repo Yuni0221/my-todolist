@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import API_KEY from "../../apikey";
+import API_KEY from "../../apikey.js";
 
 export default function Weather() {
   const [coords, saveCoords] = useState();
