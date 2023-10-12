@@ -36,7 +36,7 @@ export default function Main({ props }) {
   };
 
   return (
-    <section>
+    <section className="w-screen h-screen bg-Beige">
       <section className="flex justify-center items-center bg-Beige">
         <TodoListItem
           todo={todo}
@@ -103,7 +103,7 @@ export default function Main({ props }) {
               </div>
             </div>
           </div>
-          <div className="flex h-[700px] mt-4 ml-4 justify-start items-start">
+          <div className="flex h-[400px] mt-4 ml-4 justify-start items-start">
             <div
               className={twMerge(
                 `w-[220px] h-[220px] mr-5 bg-Blue rounded-[40px]`
